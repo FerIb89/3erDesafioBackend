@@ -22,6 +22,15 @@ app.get("/products/:id", async (req, res) => {
     let id = parseInt(req.params.id);
     let allProducts = await readProducts;
     let productsById = allProducts.find(product => product.id == id)
+
+    if (productsById) {
+        res.send(productsById)
+        console.log(id)
+    }
+    else {
+        res.status(404).json({ error: `Producto con ID ${id} no encontrado.` });
+    }
+
     res.send(productsById)
     console.log(id)
 })
